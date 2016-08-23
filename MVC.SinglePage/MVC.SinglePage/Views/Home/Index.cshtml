@@ -1,0 +1,111 @@
+﻿@model MVC.SinglePage.Data.TrainingProductViewModel
+@{
+    ViewBag.Title = "MVC Single Page - CRUD";
+}
+
+@using (Html.BeginForm())
+{
+    <!--HIDDEN FIELD-->
+    @Html.HiddenFor(m => m.EventCommand)
+
+    <!--SEARCH AREA-->
+    if (Model.IsSearchAreVisible)
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-heading">MVC Single Page - CRUD</h1>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SearchEntity.ProductName, "Product Name")
+                    @Html.TextBoxFor(m => m.SearchEntity.ProductName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-sm btn-primary"
+                        data-action="search">
+                    <i class="glyphicon glyphicon-search"></i>&nbsp; Search
+                </button>
+                <button class="btn btn-sm btn-primary"
+                        data-action="resetsearch">
+                    <i class="glyphicon glyphicon-share-alt"></i>&nbsp; Reset
+                </button>
+                <button class="btn btn-sm btn-success"
+                        data-action="add">
+                    <i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Add
+                </button>
+            </div>
+        </div>
+    }
+
+    <!-- DETAIL AREA -->
+    if (Model.IsDetailAreVisible)
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">Product Information</h1>
+            </div>
+            <div class="panel-body">
+                <div class="form-group"></div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button class="btn btn-sm btn-primary"
+                                data-action="save">
+                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Save
+                        </button>
+                        <button class="btn btn-sm btn-primary"
+                                formnovalidate="formnovalidate"
+                                data-action="cancel">
+                            <i class="glyphicon glyphicon-remove-circle"></i>&nbsp; Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+    <!--LIST AREA-->
+    if (Model.IsListAreVisible)
+    {
+        <div class="table-responsive">
+            <table class="table table-condensed table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Introduction Date</th>
+                        <th>Url</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Products)
+                    {
+                        <tr>
+                            <td>@item.ProductName</td>
+                            <td>@item.IntroductionDate</td>
+                            <td>@item.Url</td>
+                            <td>@item.Price.ToString("c")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('[data-action]').on('click', function (e) {
+
+                e.preventDefault();
+                $('#EventCommand').val($(this).data('action'));
+
+                $('form').submit();
+            })
+
+        })
+    </script>
+}
