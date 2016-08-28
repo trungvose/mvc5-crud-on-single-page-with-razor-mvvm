@@ -31,7 +31,7 @@
     │   TrainingProductViewModel.cs
 ```
 
-1. TrainingProduct.cs
+#1. TrainingProduct.cs
 It is an entity class to hold product data with 5 fields:
 - Product ID
 - Product Name
@@ -39,8 +39,8 @@ It is an entity class to hold product data with 5 fields:
 - URL
 - Price
 
-2. TrainingProductManager.cs
+#2. TrainingProductManager.cs
 It is an data access class to load mock data and store into a list of training product.
 
-3. TrainingProductViewModel.cs
+#3. TrainingProductViewModel.cs
 It is a view model to hold all the data instead of TrainingProduct class to pass into the view.
