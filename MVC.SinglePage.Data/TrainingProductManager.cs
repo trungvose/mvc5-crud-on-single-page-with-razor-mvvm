@@ -8,7 +8,66 @@ namespace MVC.SinglePage.Data
 {
     public class TrainingProductManager
     {
-        public List<TrainingProduct> Get(TrainingProduct entity) {
+        public List<KeyValuePair<string, string>> ValidationErrors { get; set; }
+        public bool Validate(TrainingProduct entity) {
+            ValidationErrors.Clear();
+
+            if (!string.IsNullOrEmpty(entity.ProductName))
+            {
+                if (entity.ProductName.ToLower() == entity.ProductName) {
+                    ValidationErrors.Add(new KeyValuePair<string, string>("Product Name", "Product Name must not be all lower case."));
+                }
+            }
+
+            return (ValidationErrors.Count == 0);
+        }
+
+        public bool Delete(TrainingProduct entity)
+        {
+            //TODO
+            return true;
+        }
+        public TrainingProduct Get(int productId) {
+            List<TrainingProduct> list = new List<TrainingProduct>();
+            TrainingProduct result = new TrainingProduct();
+
+            //TODO
+            list = CreateMockData();
+
+            result = list.Find(p => p.ProductId == productId);
+
+            return result;
+        }
+        public bool Update(TrainingProduct entity)
+        {
+            bool result = false;
+
+            result = Validate(entity);
+
+            if (result)
+            {
+                //TODO
+            }
+
+            return result;
+        }
+        public bool Insert(TrainingProduct entity) {
+            bool result = false;
+
+            result = Validate(entity);
+            if (result)
+            {
+                //TODO
+            }
+
+            return result;
+        }
+        public TrainingProductManager()
+        {
+            ValidationErrors = new List<KeyValuePair<string, string>>();
+        }
+        public List<TrainingProduct> Get(TrainingProduct entity)
+        {
             List<TrainingProduct> result = new List<TrainingProduct>();
 
             result = CreateMockData();
@@ -37,7 +96,7 @@ namespace MVC.SinglePage.Data
                 ProductId = 2,
                 ProductName = "Build your own Bootstrap Business Application Template in MVC",
                 IntroductionDate = Convert.ToDateTime("1/29/2015"),
-                Url = "http://trungk18.github.io/",
+                Url = "https://github.com/trungk18",
                 Price = Convert.ToDecimal(29.00)
             });
 
@@ -46,7 +105,7 @@ namespace MVC.SinglePage.Data
                 ProductId = 3,
                 ProductName = "Building Mobile Web Sites Using Web Forms, Bootstrap, and HTML5",
                 IntroductionDate = Convert.ToDateTime("8/28/2014"),
-                Url = "http://trungk18.github.io/",
+                Url = "http://codepen.io/trungk18/",
                 Price = Convert.ToDecimal(29.00)
             });
 
@@ -73,7 +132,7 @@ namespace MVC.SinglePage.Data
                 ProductId = 6,
                 ProductName = "WPF for the Business Programmer",
                 IntroductionDate = Convert.ToDateTime("6/12/2009"),
-                Url = "http://trungk18.github.io/",
+                Url = "http://codepen.io/trungk18/",
                 Price = Convert.ToDecimal(29.00)
             });
 
@@ -82,7 +141,7 @@ namespace MVC.SinglePage.Data
                 ProductId = 7,
                 ProductName = "WPF for the Visual Basic Programmer - Part 1",
                 IntroductionDate = Convert.ToDateTime("12/16/2014"),
-                Url = "http://trungk18.github.io/",
+                Url = "https://github.com/trungk18",
                 Price = Convert.ToDecimal(29.00)
             });
 

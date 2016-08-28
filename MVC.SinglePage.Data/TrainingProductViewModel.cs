@@ -26,6 +26,8 @@ namespace MVC.SinglePage.Data
         public bool IsDetailAreVisible { get; set; }
         public bool IsListAreVisible { get; set; }
         public bool IsSearchAreVisible { get; set; }
+        public List<KeyValuePair<string, string>> ValidationErrors { get; set; }
+        public string EventArgument { get; set; }
         public void HandleRequest()
         {
             switch (EventCommand.ToLower())
@@ -48,6 +50,16 @@ namespace MVC.SinglePage.Data
                     }
                     break;
 
+                case "edit":
+                    IsValid = true;
+                    Edit();
+                    break;
+
+                case "delete":
+                    ResetSearch();
+                    Delete();
+                    break;
+
                 case "cancel":
                     ListMode();
                     Get();
@@ -66,6 +78,8 @@ namespace MVC.SinglePage.Data
         private void Init()
         {
             EventCommand = "List";
+            EventArgument = string.Empty;
+            ValidationErrors = new List<KeyValuePair<string, string>>();
             ListMode();
         }
 
@@ -77,8 +91,9 @@ namespace MVC.SinglePage.Data
             IsSearchAreVisible = true;
             IsDetailAreVisible = false;
         }
-        
-        private void Add() {
+
+        private void Add()
+        {
             IsValid = true;
             Entity = new TrainingProduct();
             Entity.IntroductionDate = DateTime.Now; ;
@@ -86,6 +101,15 @@ namespace MVC.SinglePage.Data
             Entity.Price = 0;
 
             AddMode();
+        }
+
+        private void Edit()
+        {
+            TrainingProductManager mgr = new TrainingProductManager();
+
+            Entity = mgr.Get(Convert.ToInt32(EventArgument));
+
+            EditMode();
         }
 
         private void AddMode()
@@ -96,19 +120,52 @@ namespace MVC.SinglePage.Data
 
             Mode = "Add";
         }
-        private void Save() { 
-            if(IsValid)
+
+        private void Delete() {
+            TrainingProductManager mgr = new TrainingProductManager();
+            Entity = new TrainingProduct();
+            Entity.ProductId = Convert.ToInt32(EventArgument);
+
+            mgr.Delete(Entity);
+            Get();
+            ListMode();
+        }
+
+        private void EditMode()
+        {
+            IsListAreVisible = false;
+            IsSearchAreVisible = false;
+            IsDetailAreVisible = true;
+
+            Mode = "Edit";
+        }
+        private void Save()
+        {
+            TrainingProductManager mgr = new TrainingProductManager();
+            if (Mode == "Add")
             {
-                if (Mode == "Add")
-                {
-                    //Add
-                }
+                mgr.Insert(Entity);
             }
             else
             {
-                if (Mode =="Add")
+                mgr.Update(Entity);
+            }
+
+            ValidationErrors = mgr.ValidationErrors;
+            if (ValidationErrors.Count > 0)
+            {
+                IsValid = false;
+            }
+
+            if (!IsValid)
+            {
+                if (Mode == "Add")
                 {
                     AddMode();
+                }
+                else
+                {
+                    EditMode();
                 }
             }
         }

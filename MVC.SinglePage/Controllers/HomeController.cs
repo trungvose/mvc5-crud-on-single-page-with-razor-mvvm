@@ -27,6 +27,13 @@ namespace MVC.SinglePage.Controllers
             {
                 ModelState.Clear();
             }
+            else
+            {
+                foreach (KeyValuePair<string, string> item in vm.ValidationErrors)
+                {
+                    ModelState.AddModelError(item.Key, item.Value);
+                }
+            }
             
             return View(vm);
         }

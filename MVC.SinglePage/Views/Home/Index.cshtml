@@ -8,6 +8,7 @@
     <!--HIDDEN FIELD-->
     @Html.HiddenFor(m => m.EventCommand)
     @Html.HiddenFor(m => m.Mode)
+    @Html.HiddenFor(m => m.EventArgument)
     <!--SEARCH AREA-->
     if (Model.IsSearchAreVisible)
     {
@@ -105,20 +106,39 @@
             <table class="table table-condensed table-bordered table-striped table-hover">
                 <thead>
                     <tr>
+                        <th class="action-button-column">Edit</th>
                         <th>Product Name</th>
                         <th>Introduction Date</th>
                         <th>Url</th>
                         <th>Price</th>
+                        <th class="action-button-column">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.Products)
                     {
                         <tr>
+                            <td class="action-button-column">
+                                <a href="#" 
+                                   data-action="edit"
+                                   data-val="@item.ProductId" 
+                                   class="btn btn-default btn-sm">
+                                    <i class="glyphicon glyphicon-edit"></i>
+                                </a>
+                            </td>
                             <td>@item.ProductName</td>
                             <td>@item.IntroductionDate</td>
-                            <td>@item.Url</td>
+                            <td><a href="@item.Url">@item.Url</a></td>
                             <td>@item.Price.ToString("c")</td>
+                            <td class="action-button-column">
+                                <a href="#"
+                                   data-action="delete"
+                                   data-val="@item.ProductId"
+                                   onclick="return confirm('Delete this product?')"
+                                   class="btn btn-default btn-sm">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </a>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -131,9 +151,11 @@
     <script>
         $(document).ready(function () {
             $('[data-action]').on('click', function (e) {
-
+                //Prevent submit form
                 e.preventDefault();
+
                 $('#EventCommand').val($(this).data('action'));
+                $('#EventArgument').val($(this).data('val'));
 
                 $('form').submit();
             })

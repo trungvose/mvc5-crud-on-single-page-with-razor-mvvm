@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*Custom CSS - trungk18*/
+.action-button-column {
+    width: 4em;
+    text-align: center;
+}
