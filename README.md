@@ -2,9 +2,9 @@
 
 ###Key Feature
 1. Eliminate pages in MVC using only one default view (Index.cshtml) for all action instead of 4 pages scafforded by MVC.
-- Control the view base on server side code, not all in the client.
-- jQuery on client side handling.
-- Use Model-View-View-Model.
+    * Control the view base on server side code, not all in the client.
+    * jQuery on client side handling.
+    * Use Model-View-View-Model.
 2. Bootstrap 3 for displaying.
 3. Reduce code in controller.
 4. Reusable base class.
