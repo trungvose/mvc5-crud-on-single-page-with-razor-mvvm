@@ -14,8 +14,13 @@ namespace MVC.SinglePage.Data
 
             Products = new List<TrainingProduct>();
             SearchEntity = new TrainingProduct();
+            Entity = new TrainingProduct();
         }
+
+        public TrainingProduct Entity { get; set; }
         public string EventCommand { get; set; }
+        public bool IsValid { get; set; }
+        public string Mode { get; set; }
         public List<TrainingProduct> Products { get; set; }
         public TrainingProduct SearchEntity { get; set; }
         public bool IsDetailAreVisible { get; set; }
@@ -36,6 +41,11 @@ namespace MVC.SinglePage.Data
                     break;
 
                 case "save":
+                    Save();
+                    if (IsValid)
+                    {
+                        Get();
+                    }
                     break;
 
                 case "cancel":
@@ -44,7 +54,7 @@ namespace MVC.SinglePage.Data
                     break;
 
                 case "add":
-                    AddMode();
+                    Add();
                     break;
 
                 default:
@@ -61,9 +71,21 @@ namespace MVC.SinglePage.Data
 
         private void ListMode()
         {
+            IsValid = true;
+            Mode = "List";
             IsListAreVisible = true;
             IsSearchAreVisible = true;
             IsDetailAreVisible = false;
+        }
+        
+        private void Add() {
+            IsValid = true;
+            Entity = new TrainingProduct();
+            Entity.IntroductionDate = DateTime.Now; ;
+            Entity.Url = "http://";
+            Entity.Price = 0;
+
+            AddMode();
         }
 
         private void AddMode()
@@ -71,6 +93,24 @@ namespace MVC.SinglePage.Data
             IsListAreVisible = false;
             IsSearchAreVisible = false;
             IsDetailAreVisible = true;
+
+            Mode = "Add";
+        }
+        private void Save() { 
+            if(IsValid)
+            {
+                if (Mode == "Add")
+                {
+                    //Add
+                }
+            }
+            else
+            {
+                if (Mode =="Add")
+                {
+                    AddMode();
+                }
+            }
         }
         private void ResetSearch()
         {
