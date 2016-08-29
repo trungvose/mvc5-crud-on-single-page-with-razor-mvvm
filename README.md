@@ -12,6 +12,7 @@ This project aims to show how we can build a single page for performing CRUD (Cr
 5. Data Annotation for simple validation.
 6. Custom validation method to check other business rules.
 
+![MVC 5 Project with CRUD on a single page using Razor and MVVM technique](http://trungk18.github.io/img/repo/mvc5-singlepage-razor.png)
 
 ##Installation
 ###Require .NET Framework 4.5
