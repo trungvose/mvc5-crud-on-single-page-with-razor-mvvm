@@ -1,4 +1,17 @@
 ﻿# MVC 5 Project with CRUD on a single page using Razor and MVVM technique.
+This project aims to show how we can build a single page for performing CRUD (Create - Read - Update - Delete) without the need of separating into five different views by scaffolded by [MVC5 Controller](http://www.asp.net/visual-studio/overview/2013/aspnet-scaffolding-overview) but using only one view (Index.cshtml) with help from View Model.
+
+##Key Feature
+1. Eliminate pages in MVC using only one default view (Index.cshtml) for all action instead of 4 pages scaffolded by MVC.
+    * Control the view base on server side code, not all in the client.
+    * jQuery on client side handling.
+    * Use Model-View-View-Model.
+2. Bootstrap 3 for displaying.
+3. Reduce code in the controller.
+4. Reusable base class - ViewModelBase class with reusable properties and methods.
+5. Data Annotation for simple validation.
+6. Custom validation method to check other business rules.
+
 
 ##Installation
 Clone this repository and open MVC.SinglePage.sln with Visual Studio.
@@ -12,18 +25,6 @@ Right click into MVC.SinglePage and select View -> View in Browser (Ctrl + Shift
 ```
 Set MVC.SinglePage as StartUp project and press F5
 ```
-
-
-##Key Feature
-1. Eliminate pages in MVC using only one default view (Index.cshtml) for all action instead of 4 pages scaffolded by MVC.
-    * Control the view base on server side code, not all in the client.
-    * jQuery on client side handling.
-    * Use Model-View-View-Model.
-2. Bootstrap 3 for displaying.
-3. Reduce code in the controller.
-4. Reusable base class.
-5. Data Annotation for simple validation.
-6. Custom validation method to check other business rules.
 
 ###Project Structure
 ```
