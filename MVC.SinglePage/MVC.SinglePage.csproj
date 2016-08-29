@@ -162,6 +162,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MVC.SinglePage.Common\MVC.SinglePage.Common.csproj">
+      <Project>{8a7aa033-f64d-40f3-a98a-4e3046319b52}</Project>
+      <Name>MVC.SinglePage.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MVC.SinglePage.Data\MVC.SinglePage.Data.csproj">
       <Project>{532e9970-7e99-44ea-aa29-cd78ffd6a915}</Project>
       <Name>MVC.SinglePage.Data</Name>
